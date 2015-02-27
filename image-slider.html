@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <style>
+    .slider {
+        width: 175px;
+        height: 310px;
+        overflow: hidden;
+    }
+    .slider img {
+        position: absolute;
+    }
+    </style>
+</head>
+
+<body>
+    <h3>Slider 1</h3>
+    <div class="slider" id="slider1">
+        <img src="http://placekitten.com/175/310" />
+        <img src="http://placekitten.com/175/311" />
+        <img src="http://placekitten.com/177/310" />
+        <img src="http://placekitten.com/178/310" />
+    </div>
+    <h3>Slider 2</h3>
+    <div class="slider" id="slider2">
+        <img src="http://placekitten.com/175/320" />
+        <img src="http://placekitten.com/180/310" />
+        <img src="http://placekitten.com/182/310" />
+        <img src="http://placekitten.com/184/310" />
+    </div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        function slide(id) {
+            var index = 0;
+            var images = $("#" + id + " img");
+            for (i = 0; i < images.length; i++) {
+                $(images[i]).addClass(id + "image-" + i);
+            }
+
+            show(index);
+            setInterval(sift, 4000);
+
+            function sift() {
+                if (index < (images.length - 1)) {
+                    index += 1;
+                } else {
+                    index = 0
+                }
+                show(index);
+            }
+
+            function show(num) {
+                images.fadeOut(400);
+                $("." + id + "image-" + num).stop().fadeIn(400);
+            }
+        };
+        slide("slider1");
+        slide("slider2");
+    });
+    </script>
+</body>
+
+</html>
